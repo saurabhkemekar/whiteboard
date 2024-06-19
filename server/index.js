@@ -4,7 +4,7 @@ const cors = require("cors");
 const app = express();
 let port = 3000;
 app.use(cors());
-app.use(express.static("../client"));
+app.use(express.static("public"));
 
 let server = app.listen(port, () => {
   console.log("listening to  port " + port);

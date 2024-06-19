@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Whiteboard</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="pencil-properties properties-container">
+        <p class="text">Stroke color</p>
+        <div class="pencil-color">
+          <div class="red select-pencil-color"></div>
+          <div class="blue select-pencil-color"></div>
+          <div class="black select-pencil-color"></div>
+          <div class="orange select-pencil-color"></div>
+        </div>
+        <p class="text">Opacity</p>
+        <input type="range" min="0" max="10" class="pencil-opacity" />
+        <p class="text">Storke width</p>
+        <input type="range" min="0" max="10" class="pencil-stroke-width" />
+      </div>
+      <div class="top-menu">
+        <div class="hamburger-menu">
+          <span class="material-symbols-outlined icon"> menu </span>
+        </div>
+        <div class="tools-container">
+          <span class="material-symbols-outlined icon pencil"> edit </span>
+          <span class="material-symbols-outlined icon add-image">
+            add_photo_alternate
+          </span>
+          <span class="material-symbols-outlined icon eraser">
+            ink_eraser
+          </span>
+          <span class="material-symbols-outlined icon add-text">
+            add_notes
+          </span>
+          <span class="material-symbols-outlined icon download">
+            download
+          </span>
+          <span class="material-symbols-outlined icon undo"> undo </span>
+          <span class="material-symbols-outlined icon redo"> redo </span>
+        </div>
+        <div class="extra-options"></div>
+      </div>
+
+      <canvas></canvas>
+    </div>
+    <script
+      src="https://cdn.socket.io/4.7.5/socket.io.min.js"
+      integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      let socket = io.connect("http://localhost:3000/");
+    </script>
+    <script src="./script/tools.js"></script>
+    <script src="./script/canvas.js"></script>
+  </body>
+</html>
