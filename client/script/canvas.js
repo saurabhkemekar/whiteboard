@@ -11,7 +11,7 @@ canvas.addEventListener("mousedown", (e) => {
     const { x, y } = getMouseCoord(e.clientX, e.clientY);
     let data = { x: x, y: y, ...pencilStyleProperties };
     mouseDown = true;
-    socket.emit("beginPath", data);
+    beginPath(data);
   }
 });
 
@@ -26,7 +26,7 @@ function beginPath(data) {
 canvas.addEventListener("mousemove", (e) => {
   if (mouseDown) {
     const { x, y } = getMouseCoord(e.clientX, e.clientY);
-    socket.emit("drawPath", { x, y });
+    drawPath({ x, y });
   }
 });
 
@@ -44,12 +44,12 @@ canvas.addEventListener("mouseup", () => {
 undo.addEventListener("click", (e) => {
   if (track > 0) track--;
   // undoRedoCanvas({ undoRedoTracker, track });
-  socket.emit("undoRedo", { undoRedoTracker, track });
+  undoRedoCanvas({ undoRedoTracker, track });
 });
 
 redo.addEventListener("click", (e) => {
   if (track < undoRedoTracker.length - 1) track++;
-  socket.emit("undoRedo", { undoRedoTracker, track });
+  undoRedoCanvas({ undoRedoTracker, track });
 });
 
 function undoRedoCanvas(obj) {
@@ -68,15 +68,3 @@ function getMouseCoord(clientX, clientY) {
   const pos = canvas.getBoundingClientRect();
   return { x: clientX - pos.left, y: clientY - pos.top };
 }
-
-socket.on("beginPath", (data) => {
-  beginPath(data);
-});
-
-socket.on("drawPath", (data) => {
-  drawPath(data);
-});
-
-socket.on("undoRedo", (data) => {
-  undoRedoCanvas(data);
-});
