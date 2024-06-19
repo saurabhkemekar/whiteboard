@@ -39,6 +39,7 @@ canvas.addEventListener("mouseup", () => {
   mouseDown = false;
   undoRedoTracker.push(canvas.toDataURL());
   track = undoRedoTracker.length;
+  canvas.style.cursor = "auto";
 });
 
 undo.addEventListener("click", (e) => {
@@ -55,7 +56,6 @@ redo.addEventListener("click", (e) => {
 function undoRedoCanvas(obj) {
   track = obj.track;
   undoRedoTracker = obj.undoRedoTracker;
-  console.log(track, undoRedoTracker);
   let url = undoRedoTracker[track];
   let img = new Image();
   img.src = url;

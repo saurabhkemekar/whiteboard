@@ -1,5 +1,6 @@
 const pencil = document.querySelector(".pencil");
 const pencilProperties = document.querySelector(".pencil-properties");
+const container = document.querySelector(".container");
 let isPencilPropertiesOpen = false;
 
 const addNotes = document.querySelector(".add-text");
@@ -14,6 +15,7 @@ const erasor = document.querySelector(".eraser");
 const download = document.querySelector(".download");
 const undo = document.querySelector(".undo");
 const redo = document.querySelector(".redo");
+const theme = document.querySelector(".theme");
 const initialPeniclStyleProperties = {
   color: "black",
   opacity: 1,
@@ -26,7 +28,9 @@ pencil.addEventListener("click", (event) => {
     unSelectOtherOption();
     pencilProperties.style.display = "block";
     pencil.style.backgroundColor = "#f1eaff";
-    pencilStyleProperties.color = "black";
+    pencilStyleProperties.color = getComputedStyle(
+      document.documentElement
+    ).getPropertyValue("--black");
     pencilStyleProperties = { ...initialPeniclStyleProperties };
   } else {
     pencilProperties.style.display = "none";
@@ -57,7 +61,6 @@ addImage.addEventListener("click", (event) => {
   input.click();
 
   input.addEventListener("change", (event) => {
-    console.log("HERE");
     const imageObj = input.files[0];
     const imageURL = URL.createObjectURL(imageObj);
     const imageElement = document.createElement(`div`);
@@ -76,7 +79,6 @@ function addFunctionalityToStickyElement(element) {
   // Remove sticky element if delete is pressed
 
   element.onkeydown = (event) => {
-    console.log("KEY PRESSED", event.key);
     if (event.key === "Delete") {
       document.body.removeChild(element);
     }
@@ -117,7 +119,7 @@ function addDragAndDropFunction(event, element) {
 
 pencilColor.forEach((colorEle) => {
   colorEle.addEventListener("click", (event) => {
-    pencilStyleProperties.color = colorEle.classList[0];
+    pencilStyleProperties.color = getComputedStyle(colorEle).backgroundColor;
   });
 });
 
@@ -139,13 +141,17 @@ download.addEventListener("click", (event) => {
 
 erasor.addEventListener("click", (e) => {
   if (isErasorClicked) {
-    pencilStyleProperties.color = "#00000";
+    pencilStyleProperties.color = getComputedStyle(
+      document.documentElement
+    ).getPropertyValue("--black");
     isErasorClicked = false;
     erasor.style.backgroundColor = "transparent";
   } else {
     unSelectOtherOption();
     erasor.style.backgroundColor = "#f1eaff";
-    pencilStyleProperties.color = "#ffffff";
+    pencilStyleProperties.color = getComputedStyle(
+      document.documentElement
+    ).getPropertyValue("--white");
 
     isErasorClicked = true;
   }
@@ -155,3 +161,17 @@ function unSelectOtherOption() {
   pencil.style.backgroundColor = "transparent";
   erasor.style.backgroundColor = "transparent";
 }
+
+theme.addEventListener("click", () => {
+  if (container.getAttribute("data-theme") === "dark") {
+    theme.innerHTML =
+      ' <span class="material-symbols-outlined icon"> light_mode </span>';
+    container.setAttribute("data-theme", "light");
+  } else {
+    theme.innerHTML =
+      '<span class="material-symbols-outlined icon"> dark_mode </span>';
+    container.setAttribute("data-theme", "dark");
+  }
+});
+
+theme.click();

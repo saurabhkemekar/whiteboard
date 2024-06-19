@@ -57,7 +57,6 @@ addImage.addEventListener("click", (event) => {
   input.click();
 
   input.addEventListener("change", (event) => {
-    console.log("HERE");
     const imageObj = input.files[0];
     const imageURL = URL.createObjectURL(imageObj);
     const imageElement = document.createElement(`div`);
@@ -76,7 +75,6 @@ function addFunctionalityToStickyElement(element) {
   // Remove sticky element if delete is pressed
 
   element.onkeydown = (event) => {
-    console.log("KEY PRESSED", event.key);
     if (event.key === "Delete") {
       document.body.removeChild(element);
     }

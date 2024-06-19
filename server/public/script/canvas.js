@@ -55,7 +55,6 @@ redo.addEventListener("click", (e) => {
 function undoRedoCanvas(obj) {
   track = obj.track;
   undoRedoTracker = obj.undoRedoTracker;
-  console.log(track, undoRedoTracker);
   let url = undoRedoTracker[track];
   let img = new Image();
   img.src = url;
