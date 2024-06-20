@@ -178,7 +178,6 @@ function unSelectOtherOption() {
 // theme.click();
 
 hamburgerMenu.addEventListener("click", (event) => {
-  console.log("HERE");
   if (getComputedStyle(toolsContainer).display === "none") {
     toolsContainer.style.display = "flex";
   } else {
