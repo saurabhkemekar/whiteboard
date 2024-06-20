@@ -1,8 +1,9 @@
+const toolsContainer = document.querySelector(".tools-container");
 const pencil = document.querySelector(".pencil");
 const pencilProperties = document.querySelector(".pencil-properties");
 const container = document.querySelector(".container");
 let isPencilPropertiesOpen = false;
-
+const hamburgerMenu = document.querySelector(".hamburger-menu");
 const addNotes = document.querySelector(".add-text");
 const notesContainer = document.querySelector(".main");
 const textArea = document.getElementsByTagName("textArea");
@@ -15,7 +16,7 @@ const erasor = document.querySelector(".eraser");
 const download = document.querySelector(".download");
 const undo = document.querySelector(".undo");
 const redo = document.querySelector(".redo");
-const theme = document.querySelector(".theme");
+// const theme = document.querySelector(".theme");
 const initialPeniclStyleProperties = {
   color: "black",
   opacity: 1,
@@ -162,16 +163,26 @@ function unSelectOtherOption() {
   erasor.style.backgroundColor = "transparent";
 }
 
-theme.addEventListener("click", () => {
-  if (container.getAttribute("data-theme") === "dark") {
-    theme.innerHTML =
-      ' <span class="material-symbols-outlined icon"> light_mode </span>';
-    container.setAttribute("data-theme", "light");
+// theme.addEventListener("click", () => {
+//   if (container.getAttribute("data-theme") === "dark") {
+//     theme.innerHTML =
+//       ' <span class="material-symbols-outlined icon"> light_mode </span>';
+//     container.setAttribute("data-theme", "light");
+//   } else {
+//     theme.innerHTML =
+//       '<span class="material-symbols-outlined icon"> dark_mode </span>';
+//     container.setAttribute("data-theme", "dark");
+//   }
+// });
+
+// theme.click();
+
+hamburgerMenu.addEventListener("click", (event) => {
+  console.log("HERE");
+  if (getComputedStyle(toolsContainer).display === "none") {
+    toolsContainer.style.display = "flex";
   } else {
-    theme.innerHTML =
-      '<span class="material-symbols-outlined icon"> dark_mode </span>';
-    container.setAttribute("data-theme", "dark");
+    toolsContainer.style.display = "none";
+    pencilProperties.style.display = "none";
   }
 });
-
-theme.click();
